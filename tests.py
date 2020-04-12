@@ -1,8 +1,9 @@
-from Int_Tree import Int_Tree as Tree
+from Tree import Tree
 import unittest
 
+
 def init_tree() -> Tree:
-    '''
+    """
     Generates a tree that looks like
                     6
                    / \
@@ -13,26 +14,29 @@ def init_tree() -> Tree:
               1  3       10
                  /\
                    4      
-    '''
+    """
     tree = Tree()
     children = [6, 8, 9, 5, 2, 1, 3, 7, 10, 4]
     [tree.add_child(child) for child in children]
     return tree
 
-class Create_Parent(unittest.TestCase):
+
+class CreateParent(unittest.TestCase):
     def test(self):
         tree = Tree()
         tree.add_child(5)
         assert(tree.parent == 5)
 
-class Children_Are_None(unittest.TestCase):
+
+class ChildrenAreNone(unittest.TestCase):
     def test(self):
         tree = Tree()
         tree.add_child(5)
         assert(tree.tree[5]["left"] is None)
         assert(tree.tree[5]["right"] is None)
-                      
-class Single_Left_Child(unittest.TestCase):
+        
+
+class SingleLeftChild(unittest.TestCase):
     def test(self):
         tree = Tree()
         tree.add_child(5)
@@ -40,21 +44,23 @@ class Single_Left_Child(unittest.TestCase):
         assert(tree.tree[5]["left"] == 3)
         
 
-class Single_Right_Child(unittest.TestCase):
+class SingleRightChild(unittest.TestCase):
     def test(self):
         tree = Tree()
         tree.add_child(5)
         tree.add_child(6)
         assert(tree.tree[5]["right"] == 6)
 
-class Two_Children(unittest.TestCase):
+
+class TwoChildren(unittest.TestCase):
     def test(self):
        tree = Tree()
        children = [5, 4, 6]
        [tree.add_child(child) for child in children]
        assert(tree.tree[5]["left"] == 4 and tree.tree[5]["right"] == 6)
 
-class Complex_Tree(unittest.TestCase):
+
+class ComplexTree(unittest.TestCase):
     def test(self):
         tree = init_tree()
         assert(tree.parent == 6)
@@ -74,12 +80,24 @@ class Complex_Tree(unittest.TestCase):
         except AssertionError:
             raise AssertionError(str(tree.tree))
 
+
 class Collate(unittest.TestCase):
     def test(self):
         tree = init_tree()
         l = tree.collate()
         try:
             assert(l == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        except AssertionError:
+            raise AssertionError(str(l))
+
+
+class CollateWithDuplicates(unittest.TestCase):
+    def test(self):
+        tree = init_tree()
+        tree.add_child(4)
+        l = tree.collate()
+        try:
+            assert(l == [1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 10])    # Extra 4
         except AssertionError:
             raise AssertionError(str(l))
 
