@@ -1,3 +1,3 @@
 # tree_sort
 
-A python implementation of [Tree Sort](https://en.wikipedia.org/wiki/Tree_sort) using a Tree class
+An implementation of [tree sort](https://en.wikipedia.org/wiki/Tree_sort) in Python using a Tree class. Works on lists of numbers.
